@@ -1,0 +1,14 @@
+apiVersion: agent-install.openshift.io/v1beta1
+kind: AgentServiceConfig
+metadata:
+  name: agent
+  namespace: open-cluster-management
+  annotations:
+    argocd.argoproj.io/sync-wave: "275"
+spec:
+  databaseStorage:
+    storageClassName: ocs-storagecluster-ceph-rbd
+  filesystemStorage:
+    storageClassName: ocs-storagecluster-ceph-rbd
+  imageStorage:
+    storageClassName: ocs-storagecluster-ceph-rbd 
