@@ -4,7 +4,7 @@ metadata:
   name: ibm-cp4a-operator-catalog-subscription
   namespace: cp4ba
   annotations:
-    # argocd.argoproj.io/sync-wave: "220"
+    argocd.argoproj.io/sync-wave: "250"
 spec:
   channel: changeme_version
   name: ibm-cp4a-operator
