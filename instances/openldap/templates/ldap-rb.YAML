@@ -9,4 +9,4 @@ roleRef:
 subjects:
 - namespace: openshift-gitops 
   kind: ServiceAccount
-  name: openshift-gitops-cntk-argocd-application-controller
+  name: openshift-gitops-cntk-openshift-gitops-argocd-application-controller
