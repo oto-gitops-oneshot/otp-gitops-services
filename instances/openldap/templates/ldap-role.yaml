@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: ingress-creator-role
-  namespace: openldap
+  namespace: openshift-gitops
 rules:
 - apiGroups: ["networking.k8s.io"] # "" indicates the core API group
   resources: ["ingress"]
