@@ -1,8 +1,0 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
-metadata:
-  name: ingress-creator-role
-rules:
-- apiGroups: ["networking.k8s.io"] # "" indicates the core API group
-  resources: ["ingress"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
