@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ingress-creator-role
+  namespace: openldap
+rules:
+- apiGroups: ["networking.k8s.io"] # "" indicates the core API group
+  resources: ["ingress"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
