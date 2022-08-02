@@ -10,4 +10,4 @@ spec:
   name: ibm-cp4a-operator
   installPlanApproval: Automatic
   source: ibm-cp4a-operator-catalog
-  sourceNamespace: cp4ba
+  sourceNamespace: openshift-marketplace
