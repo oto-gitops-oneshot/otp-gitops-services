@@ -1,19 +1,10 @@
 kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 
-namespace: cp4ba
+namespace: openshift-marketplace
 
 bases:
   - ../../base
-
-patches:
-  - target:
-      kind: Subscription
-      name: ibm-cp4a-operator-catalog-subscription
-    patch: |-
-      - op: replace
-        path: /spec/channel
-        value: 'v22.1'
 
   # templatise images in catalog sources - v22.1
   # catalog source
