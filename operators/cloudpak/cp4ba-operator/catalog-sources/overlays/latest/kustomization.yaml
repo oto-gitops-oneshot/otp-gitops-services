@@ -6,6 +6,7 @@ namespace: openshift-marketplace
 bases:
   - ../../base
 
+patches:
   # templatise images in catalog sources - v22.1
   # catalog source
   - target:
