@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: openldap-phpldapadmin
+  namespace: openldap
+spec:
+  path: /
+  to:
+    kind: Service
+    name: openldap-phpldapadmin
+  port:
+    targetPort: 80
