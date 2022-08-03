@@ -12,7 +12,7 @@ global:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: ["harbor"]
-  storageClass: ""
+  storageClass: "{{ storage_class_name }}"
   ldapDomain: "example.org"
   ## Default Passwords to use, stored as a secret. Not used if existingSecret is set.
   adminPassword: Not@SecurePassw0rd
@@ -42,7 +42,7 @@ clusterDomain: cluster.local
 ##
 extraDeploy: []
 
-replicaCount: 3
+replicaCount: 1
 
 image:
   # From repository https://github.com/osixia/docker-openldap
@@ -95,7 +95,8 @@ service:
 # Use the env variables from https://github.com/osixia/docker-openldap#beginner-guide
 env:
  LDAP_LOG_LEVEL: "256"
- LDAP_ORGANISATION: "Example Inc."
+ LDAP_ORGANISATION: "CP"
+ LDAP_DOMAIN: "cp"
  LDAP_READONLY_USER: "false"
  LDAP_READONLY_USER_USERNAME: "readonly"
  LDAP_READONLY_USER_PASSWORD: "readonly"
@@ -114,12 +115,108 @@ env:
  LDAP_TLS_VERIFY_CLIENT: "never"
  LDAP_TLS_PROTOCOL_MIN: "3.0"
  LDAP_TLS_CIPHER_SUITE: "NORMAL"
+ PHPLDAPADMIN_LDAP_HOSTS: "{{ openldap_hostname }}"
 
 # Custom openldap configuration files used to override default settings
 # customLdifFiles:
-  # 01-default-users.ldif: |-
-    # Predefine users here
+#   01-default-users.ldif: |-
+#     Predefine users here
+customLdifFiles:
+  01-default-users.ldif: |-
+    # Units
+    dn: ou=Users,dc=cp
+    objectClass: organizationalUnit
+    ou: Users
 
+    dn: ou=Groups,dc=cp
+    objectClass: organizationalUnit
+    ou: Groups
+
+    # Users
+    dn: uid=cpadmin,ou=Users,dc=cp
+    objectClass: inetOrgPerson
+    objectClass: top
+    cn: cpadmin
+    sn: cpadmin
+    uid: cpadmin
+    mail: cpadmin@cp.local
+    userpassword:: {{ universal_password | b64encode }}
+    employeeType: admin
+
+    dn: uid=cpadmin1,ou=Users,dc=cp
+    objectClass: inetOrgPerson
+    objectClass: top
+    cn: cpadmin1
+    sn: cpadmin1
+    uid: cpadmin1
+    mail: cpadmin1@cp.local
+    userpassword:: {{ universal_password | b64encode }}
+    employeeType: admin
+
+    dn: uid=cpadmin2,ou=Users,dc=cp
+    objectClass: inetOrgPerson
+    objectClass: top
+    cn: cpadmin2
+    sn: cpadmin2
+    uid: cpadmin2
+    mail: cpadmin2@cp.local
+    userpassword:: {{ universal_password | b64encode }}
+    employeeType: admin
+
+    dn: uid=cpuser,ou=Users,dc=cp
+    objectClass: inetOrgPerson
+    objectClass: top
+    cn: cpuser
+    sn: cpuser
+    uid: cpuser
+    mail: cpuser@cp.local
+    userpassword:: {{ universal_password | b64encode }}
+
+    dn: uid=cpuser1,ou=Users,dc=cp
+    objectClass: inetOrgPerson
+    objectClass: top
+    cn: cpuser1
+    sn: cpuser1
+    uid: cpuser1
+    mail: cpuser1@cp.local
+    userpassword:: {{ universal_password | b64encode }}
+
+    dn: uid=cpuser2,ou=Users,dc=cp
+    objectClass: inetOrgPerson
+    objectClass: top
+    cn: cpuser2
+    sn: cpuser2
+    uid: cpuser2
+    mail: cpuser2@cp.local
+    userpassword:: {{ universal_password | b64encode }}
+
+    # Groups
+    dn: cn=cpadmins,ou=Groups,dc=cp
+    objectClass: groupOfNames
+    objectClass: top
+    cn: cpadmins
+    member: uid=cpadmin,ou=Users,dc=cp
+    member: uid=cpadmin1,ou=Users,dc=cp
+    member: uid=cpadmin2,ou=Users,dc=cp
+
+    dn: cn=cpusers,ou=Groups,dc=cp
+    objectClass: groupOfNames
+    objectClass: top
+    cn: cpusers
+    member: uid=cpadmin,ou=Users,dc=cp
+    member: uid=cpadmin1,ou=Users,dc=cp
+    member: uid=cpadmin2,ou=Users,dc=cp
+    member: uid=cpuser,ou=Users,dc=cp
+    member: uid=cpuser1,ou=Users,dc=cp
+    member: uid=cpuser2,ou=Users,dc=cp
+
+    dn: cn=cpusers1,ou=Groups,dc=cp
+    objectClass: groupOfNames
+    objectClass: top
+    cn: cpusers1
+    member: uid=cpuser,ou=Users,dc=cp
+    member: uid=cpuser1,ou=Users,dc=cp
+    member: uid=cpuser2,ou=Users,dc=cp
 # Custom files with provided contents to be added in container.
 customFileSets: []
 #- name: fileset1
@@ -133,7 +230,7 @@ customFileSets: []
 #      olcModuleLoad: memberof
 
 replication:
-  enabled: true    
+  enabled: false    
   # Enter the name of your cluster, defaults to "cluster.local"
   clusterName: "cluster.local"
   retry: 60
@@ -154,7 +251,7 @@ persistence:
   # storageClass: "standard-singlewriter"
   # existingClaim: openldap-pvc
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   size: 8Gi
 
 ## @param customLivenessProbe Custom livenessProbe that overrides the default one
