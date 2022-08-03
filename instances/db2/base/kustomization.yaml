@@ -5,6 +5,5 @@ namespace: openshift-operators
 
 resources:
   - daemon-set.yaml
-  - service-account.yaml
-  - privileged-scc-clusterrolebinding.yaml
+  - db2ucluster.yaml
   
