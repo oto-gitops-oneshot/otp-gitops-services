@@ -18,7 +18,7 @@ metadata:
 {{- end }}
 data:
   LDAP_DOMAIN: {{ .Values.global.ldapDomain }}
-{{ toYaml .Values.env | indent 4 }}
+{{ toYaml .Values.env | indent 2 }}
 {{- if .Values.replication.enabled }}
   LDAP_REPLICATION: "true"
   LDAP_REPLICATION_CONFIG_SYNCPROV: "binddn=\"cn=admin,cn=config\" bindmethod=simple credentials=$LDAP_CONFIG_PASSWORD searchbase=\"cn=config\" type=refreshAndPersist retry=\"{{.Values.replication.retry }} +\" timeout={{.Values.replication.timeout }} starttls={{.Values.replication.starttls }} tls_reqcert={{.Values.replication.tls_reqcert }}"
