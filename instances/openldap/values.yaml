@@ -53,7 +53,7 @@ image:
 
 # Set the container log level
 # Valid log levels: none, error, warning, info (default), debug, trace
-logLevel: info
+logLevel: debug
 
 # Specifies an existing secret to be used for admin and config user passwords. The expected key are LDAP_ADMIN_PASSWORD and LDAP_CONFIG_PASSWORD.
 existingSecret: ""
