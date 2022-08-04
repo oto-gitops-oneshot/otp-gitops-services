@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: norootsquash
+  namespace: db2
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: unrootsquash
+          image: alpine:3.15.5
+      containers:
+        - name: sleep
+          image: alpine:3.15.5
+

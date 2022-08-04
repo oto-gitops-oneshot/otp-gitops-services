@@ -1,0 +1,14 @@
+apiVersion: db2u.databases.ibm.com/v1
+kind: Db2uCluster
+metadata:
+  name: db2
+  namespace: db2
+spec:
+  account:
+    imagePullSecrets:
+      - ibm-entitlement-key
+  version: 11.5.7.0
+  storage:
+    - name: share
+      spec:
+        storageClassName: ibmc-file-gold-gid

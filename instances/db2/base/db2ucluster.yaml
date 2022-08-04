@@ -23,11 +23,11 @@ spec:
             memory: 4Gi
   account:
     imagePullSecrets:
-      - ibm-entitlement-key
+      - changeme
     privileged: true
   environment:
     dbType: db2oltp
-  version: 11.5.7.0
+  version: changeme
   storage:
     - name: share
       type: create
@@ -37,4 +37,4 @@ spec:
         resources:
           requests:
             storage: 100Gi
-        storageClassName: ibmc-file-gold-gid
+        storageClassName: changeme

@@ -25,7 +25,7 @@ spec:
               cpu: 0.1
           securityContext:
             privileged: true
-          image: alpine:3.15.5
+          image: changeme
           name: unrootsquash
           command: ["chroot", "/host", "sh", "-c"]
           args:
@@ -43,7 +43,7 @@ spec:
         - resources:
             requests:
               cpu: 0.1
-          image: alpine:3.15.5
+          image: changeme
           name: sleep
           command: ["/bin/sh", "-c"]
           args:

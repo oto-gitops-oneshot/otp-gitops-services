@@ -1,0 +1,23 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: db2
+
+bases:
+  - ../../base
+
+patchesStrategicMerge:
+  - daemonset.yaml
+  - db2ucluster.yaml
+
+# patches:
+#   - target:
+#       kind: Db2uCluster
+#       name: db2
+#     patch: |-
+#       - op: replace
+#         path: /spec/storage/spec/storageClassName
+#         value: 'ibmc-file-gold-gid'
+#       - op: replace
+#         path: /spec/version
+#         value: '11.5.7.0'

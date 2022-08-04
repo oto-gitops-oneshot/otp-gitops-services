@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: openshift-operators
 
 resources:
-  - daemon-set.yaml
+  - daemonset.yaml
   - db2ucluster.yaml
   
