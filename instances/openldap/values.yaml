@@ -15,8 +15,8 @@
           storageClass: "{{ storage_class_name }}"
           ldapDomain: "local.io"
           ## Default Passwords to use, stored as a secret. Not used if existingSecret is set.
-          adminPassword: Not@SecurePassw0rd
-          configPassword: Not@SecurePassw0rd
+          adminPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
+          configPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
 
         ## @section Common parameters
 
@@ -56,11 +56,7 @@
         logLevel: debug
 
         # Specifies an existing secret to be used for admin and config user passwords. The expected key are LDAP_ADMIN_PASSWORD and LDAP_CONFIG_PASSWORD.
-<<<<<<< HEAD
         existingSecret: "openldap-secrets"
-=======
-        existingSecret: "openldap"
->>>>>>> 7ab6961f8cb9da1737bb83cfd234bf1e368fa59a
 
         # Settings for enabling TLS with custom certificate
         # need a secret with tls.crt, tls.key and ca.crt keys with associated files
