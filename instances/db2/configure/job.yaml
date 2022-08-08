@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db2-configuration
+  namespace: db2
+spec:
+  template:
+    spec:
+      serviceAccountName: db2-configure-sa
+      containers:
+      - name: db2-config
+        image: quay.io/langley_millard_ibm/configure-db2
+        command: ["./configure_db2.sh"]
+        env:
+        - name: KUBECONFIG
+          value: "/tmp/config"   # Id running this process isn't root. The location of the KUBECONFIG file, unless otherwise specified, is in /root. We change it to /tmp to avoid permission issues
+        args: ["-a", "preconfigure"] # Simply change the value passed to this flag for different phases (Ie, postconfigure)
+        imagePullPolicy: Always
+      restartPolicy: OnFailure
+  backoffLimit: 2
