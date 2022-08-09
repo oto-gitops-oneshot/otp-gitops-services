@@ -16,7 +16,7 @@ SEALED_SECRET_CONTOLLER_NAME=${SEALED_SECRET_CONTOLLER_NAME:-sealed-secrets}
 
 # Create Kubernetes Secret yaml in namespace "kube-system"
 oc create secret generic secrets-mgr-ap-key -n kube-system \
-   --from-literal API_KEY=${API_KEY} \
+   --from-literal apiKey=${API_KEY} \
    --dry-run=client -o yaml > delete-api-key-secret.yaml
 
 # Encrypt the secret using kubeseal and private key from the cluster
