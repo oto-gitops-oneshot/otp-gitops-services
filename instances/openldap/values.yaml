@@ -438,6 +438,14 @@ phpldapadmin:
 
 customLdifFiles:
   01-default-users.ldif: |-
+
+    dn: dc=cp,dc=example
+    dc: cp
+    o: Example Inc.
+    objectclass: top
+    objectclass: dcObject
+    objectclass: organization
+
     # Units
     dn: ou=Users,dc=cp
     objectClass: organizationalUnit
@@ -455,7 +463,7 @@ customLdifFiles:
     sn: cpadmin
     uid: cpadmin
     mail: cpadmin@cp.local
-    userpassword:: {{ universal_password | b64encode }}
+    userpassword:: Not@SecurePassw0rd
     employeeType: admin
 
     dn: uid=cpadmin1,ou=Users,dc=cp
@@ -465,7 +473,7 @@ customLdifFiles:
     sn: cpadmin1
     uid: cpadmin1
     mail: cpadmin1@cp.local
-    userpassword:: {{ universal_password | b64encode }}
+    userpassword:: Not@SecurePassw0rd
     employeeType: admin
 
     dn: uid=cpadmin2,ou=Users,dc=cp
@@ -475,7 +483,7 @@ customLdifFiles:
     sn: cpadmin2
     uid: cpadmin2
     mail: cpadmin2@cp.local
-    userpassword:: {{ universal_password | b64encode }}
+    userpassword:: Not@SecurePassw0rd
     employeeType: admin
 
     dn: uid=cpuser,ou=Users,dc=cp
@@ -485,7 +493,7 @@ customLdifFiles:
     sn: cpuser
     uid: cpuser
     mail: cpuser@cp.local
-    userpassword:: {{ universal_password | b64encode }}
+    userpassword:: Not@SecurePassw0rd
 
     dn: uid=cpuser1,ou=Users,dc=cp
     objectClass: inetOrgPerson
@@ -494,7 +502,7 @@ customLdifFiles:
     sn: cpuser1
     uid: cpuser1
     mail: cpuser1@cp.local
-    userpassword:: {{ universal_password | b64encode }}
+    userpassword:: Not@SecurePassw0rd
 
     dn: uid=cpuser2,ou=Users,dc=cp
     objectClass: inetOrgPerson
@@ -503,7 +511,7 @@ customLdifFiles:
     sn: cpuser2
     uid: cpuser2
     mail: cpuser2@cp.local
-    userpassword:: {{ universal_password | b64encode }}
+    userpassword:: Not@SecurePassw0rd
 
     # Groups
     dn: cn=cpadmins,ou=Groups,dc=cp
