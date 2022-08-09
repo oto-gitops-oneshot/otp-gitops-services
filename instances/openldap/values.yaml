@@ -379,14 +379,14 @@ volumePermissions:
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
 livenessProbe:
   enabled: true
-  initialDelaySeconds: 60
+  initialDelaySeconds: 20
   periodSeconds: 10
   timeoutSeconds: 1
   successThreshold: 1
   failureThreshold: 10
 readinessProbe:
   enabled: true
-  initialDelaySeconds: 60
+  initialDelaySeconds: 20
   periodSeconds: 10
   timeoutSeconds: 1
   successThreshold: 1
@@ -406,7 +406,7 @@ test:
     repository: dduportal/bats
     tag: 0.4.0
 ltb-passwd:
-  enabled : false
+  enabled : true
   image:
     tag: 5.2.3
   ingress:
