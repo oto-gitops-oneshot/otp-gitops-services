@@ -15,7 +15,7 @@ global:
   ##
   imagePullSecrets: ["osixiaps"]
   storageClass: ""
-  ldapDomain: "local.cp"
+  ldapDomain: "cp"
   ## Default Passwords to use, stored as a secret. Not used if existingSecret is set.
   adminPassword: Not@SecurePassw0rd
   configPassword: Not@SecurePassw0rd
@@ -439,12 +439,12 @@ phpldapadmin:
 customLdifFiles:
   01-default-users.ldif: |-
 
-    dn: dc=cp,dc=example
-    dc: cp
-    o: Example Inc.
-    objectclass: top
-    objectclass: dcObject
-    objectclass: organization
+    # dn: dc=local,dc=cp
+    # dc: local
+    # o: Example Inc.
+    # objectclass: top
+    # objectclass: dcObject
+    # objectclass: organization
 
     # Units
     dn: ou=Users,dc=cp
