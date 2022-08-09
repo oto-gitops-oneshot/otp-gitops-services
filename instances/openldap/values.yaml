@@ -15,8 +15,8 @@
           storageClass: "{{ storage_class_name }}"
           ldapDomain: "local.io"
           ## Default Passwords to use, stored as a secret. Not used if existingSecret is set.
-          # adminPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
-          # configPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
+          adminPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
+          configPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
 
         ## @section Common parameters
 
@@ -514,8 +514,8 @@
             - "ssl-ldap2.local"
           ldap:
             #server: ldaps://openldap-openldap-stack-ha
-            # existingSecret: openldaptest
-            #bindDN: cn=admin,dc=example,dc=org
+            existingSecret: "openldap-secrets"
+            bindDN: cn=admin,dc=example,dc=org
             bindPWKey: LDAP_ADMIN_PASSWORD
 
         phpldapadmin:
