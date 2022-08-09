@@ -56,7 +56,7 @@
         logLevel: debug
 
         # Specifies an existing secret to be used for admin and config user passwords. The expected key are LDAP_ADMIN_PASSWORD and LDAP_CONFIG_PASSWORD.
-        existingSecret: "openldap-secrets"
+        existingSecret: ""
 
         # Settings for enabling TLS with custom certificate
         # need a secret with tls.crt, tls.key and ca.crt keys with associated files
@@ -514,8 +514,8 @@
             - "ssl-ldap2.local"
           ldap:
             #server: ldaps://openldap-openldap-stack-ha
-            existingSecret: "openldap-secrets"
-            bindDN: cn=admin,dc=example,dc=org
+            # existingSecret: "openldap-secrets"
+            # bindDN: cn=admin,dc=example,dc=org
             bindPWKey: LDAP_ADMIN_PASSWORD
 
         phpldapadmin:
