@@ -15,7 +15,7 @@ global:
   ##
   imagePullSecrets: ["osixiaps"]
   storageClass: ""
-  ldapDomain: "local.io"
+  ldapDomain: "local.cp"
   ## Default Passwords to use, stored as a secret. Not used if existingSecret is set.
   adminPassword: Not@SecurePassw0rd
   configPassword: Not@SecurePassw0rd
@@ -464,7 +464,7 @@ customLdifFiles:
     objectClass: top
     cn: admins
     member: uid=admin,ou=Users,dc=cp
-    
+
 #     dn: uid=cpadmin1,ou=Users,dc=cp
 #     objectClass: inetOrgPerson
 #     objectClass: top
