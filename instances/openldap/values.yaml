@@ -15,8 +15,8 @@
           storageClass: "{{ storage_class_name }}"
           ldapDomain: "local.io"
           ## Default Passwords to use, stored as a secret. Not used if existingSecret is set.
-          adminPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
-          configPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
+          # adminPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
+          # configPassword: Not@SecurePassw0rd # These are not used, refer to line 58.
 
         ## @section Common parameters
 
