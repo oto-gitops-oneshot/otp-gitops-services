@@ -58,7 +58,7 @@ image:
 logLevel: info
 
 # Specifies an existing secret to be used for admin and config user passwords. The expected key are LDAP_ADMIN_PASSWORD and LDAP_CONFIG_PASSWORD.
-existingSecret: ""
+existingSecret: "openldap-secrets"
 
 # Settings for enabling TLS with custom certificate
 # need a secret with tls.crt, tls.key and ca.crt keys with associated files
