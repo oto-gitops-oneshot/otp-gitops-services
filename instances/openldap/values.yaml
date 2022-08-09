@@ -11,7 +11,7 @@
           ## imagePullSecrets:
           ##   - myRegistryKeySecretName
           ##
-          imagePullSecrets: ["harbor"]
+          imagePullSecrets: ["osixiaps"]
           storageClass: "{{ storage_class_name }}"
           ldapDomain: "local.io"
           ## Default Passwords to use, stored as a secret. Not used if existingSecret is set.
