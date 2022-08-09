@@ -459,13 +459,13 @@ customLdifFiles:
     employeeType: admin
 
     # Groups
-    dn: cn=cpadmins,ou=Groups,dc=cp
+    dn: cn=admins,ou=Groups,dc=cp
     objectClass: groupOfNames
     objectClass: top
-    cn: cpadmins
-    member: uid=cpadmin,ou=Users,dc=cp
-    member: uid=cpadmin1,ou=Users,dc=cp
-    member: uid=cpadmin2,ou=Users,dc=cp
+    cn: admins
+    member: uid=admin,ou=Users,dc=cp
+    member: uid=admin1,ou=Users,dc=cp
+    member: uid=admin2,ou=Users,dc=cp
 #     dn: uid=cpadmin1,ou=Users,dc=cp
 #     objectClass: inetOrgPerson
 #     objectClass: top
