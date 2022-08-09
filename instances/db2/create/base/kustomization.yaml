@@ -6,4 +6,5 @@ namespace: openshift-operators
 resources:
   - daemonset.yaml
   - db2ucluster.yaml
+  - pull-secret.yaml
   

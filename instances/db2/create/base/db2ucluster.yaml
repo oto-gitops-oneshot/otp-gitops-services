@@ -23,7 +23,7 @@ spec:
             memory: 4Gi
   account:
     imagePullSecrets:
-      - changeme
+      - db2-pull-secret
     privileged: true
   environment:
     dbType: db2oltp
