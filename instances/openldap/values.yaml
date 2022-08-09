@@ -418,7 +418,7 @@ ltb-passwd:
     hosts:
     - "ssl-ldap2.local"
   ldap:
-    #server: ldaps://openldap-openldap-stack-ha
+    server: ldaps://openldap-openldap-stack-ha
     # existingSecret: openldaptest
     #bindDN: cn=admin,dc=local,dc=org
     bindPWKey: LDAP_ADMIN_PASSWORD
