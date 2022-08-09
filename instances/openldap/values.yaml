@@ -464,8 +464,7 @@ customLdifFiles:
     objectClass: top
     cn: admins
     member: uid=admin,ou=Users,dc=cp
-    member: uid=admin1,ou=Users,dc=cp
-    member: uid=admin2,ou=Users,dc=cp
+    
 #     dn: uid=cpadmin1,ou=Users,dc=cp
 #     objectClass: inetOrgPerson
 #     objectClass: top
