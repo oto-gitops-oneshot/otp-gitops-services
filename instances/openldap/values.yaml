@@ -436,8 +436,18 @@ phpldapadmin:
     hosts:
     - phpldapadmin.local
 
-# customLdifFiles:
-#   01-default-users.ldif: |-
+customLdifFiles:
+  01-default-users.ldif: |-
+      dn: uid=admin,ou=Users,dc=cp
+      objectClass: inetOrgPerson
+      objectClass: top
+      cn: admin
+      sn: admin
+      uid: admin
+      mail: admin@cp.local
+      userpassword:: Not@SecurePassw0rd
+      employeeType: admin
+
 #     # Units
 #     dn: ou=Users,dc=cp
 #     objectClass: organizationalUnit
