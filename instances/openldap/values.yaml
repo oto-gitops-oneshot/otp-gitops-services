@@ -436,8 +436,6 @@ phpldapadmin:
     hosts:
     - phpldapadmin.example
 
-adminPassword: '{{ universal_password }}'
-configPassword: '{{ universal_password }}'
 customLdifFiles:
   01-default-users.ldif: |-
     # Units
