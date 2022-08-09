@@ -438,6 +438,17 @@ phpldapadmin:
 
 customLdifFiles:
   01-default-users.ldif: |-
+      
+      # Units
+      dn: ou=Users,dc=cp
+      objectClass: organizationalUnit
+      ou: Users
+
+      dn: ou=Groups,dc=cp
+      objectClass: organizationalUnit
+      ou: Groups
+
+      # Users
       dn: uid=admin,ou=Users,dc=cp
       objectClass: inetOrgPerson
       objectClass: top
@@ -448,26 +459,14 @@ customLdifFiles:
       userpassword:: Not@SecurePassw0rd
       employeeType: admin
 
-#     # Units
-#     dn: ou=Users,dc=cp
-#     objectClass: organizationalUnit
-#     ou: Users
-
-#     dn: ou=Groups,dc=cp
-#     objectClass: organizationalUnit
-#     ou: Groups
-
-#     # Users
-#     dn: uid=cpadmin,ou=Users,dc=cp
-#     objectClass: inetOrgPerson
-#     objectClass: top
-#     cn: cpadmin
-#     sn: cpadmin
-#     uid: cpadmin
-#     mail: cpadmin@cp.local
-#     userpassword:: Not@SecurePassw0rd
-#     employeeType: admin
-
+      # Groups
+      dn: cn=cpadmins,ou=Groups,dc=cp
+      objectClass: groupOfNames
+      objectClass: top
+      cn: cpadmins
+      member: uid=cpadmin,ou=Users,dc=cp
+      member: uid=cpadmin1,ou=Users,dc=cp
+      member: uid=cpadmin2,ou=Users,dc=cp
 #     dn: uid=cpadmin1,ou=Users,dc=cp
 #     objectClass: inetOrgPerson
 #     objectClass: top
@@ -514,15 +513,6 @@ customLdifFiles:
 #     uid: cpuser2
 #     mail: cpuser2@cp.local
 #     userpassword:: {{ universal_password | b64encode }}
-
-#     # Groups
-#     dn: cn=cpadmins,ou=Groups,dc=cp
-#     objectClass: groupOfNames
-#     objectClass: top
-#     cn: cpadmins
-#     member: uid=cpadmin,ou=Users,dc=cp
-#     member: uid=cpadmin1,ou=Users,dc=cp
-#     member: uid=cpadmin2,ou=Users,dc=cp
 
 #     dn: cn=cpusers,ou=Groups,dc=cp
 #     objectClass: groupOfNames
