@@ -455,7 +455,7 @@ customLdifFiles:
     sn: cpadmin
     uid: cpadmin
     mail: cpadmin@cp.local
-    userpassword:: {{ universal_password | b64encode }}
+    userpassword:: Not@SecurePassw0rd
     employeeType: admin
 
     dn: uid=cpadmin1,ou=Users,dc=cp
