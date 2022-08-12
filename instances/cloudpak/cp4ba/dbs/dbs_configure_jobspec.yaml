@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: database-configuration
+  # can change this to cp4ba if we need to, but the job is ALL about configruing db2 for cp4ba so this seems like good separation to me. 
   namespace: db2
 spec:
   template:
