@@ -6,7 +6,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: cp4ba-sa
+      serviceAccountName: global-ca-sa
       containers:
       - name: init-certs
         image: quay.io/langley_millard_ibm/predeploy-certs # location the image is pushed to i.e. quay.io/langley_millard_ibm/repo_name
