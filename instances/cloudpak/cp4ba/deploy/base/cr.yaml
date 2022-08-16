@@ -1,0 +1,58 @@
+apiVersion: icp4a.ibm.com/v1
+kind: ICP4ACluster
+metadata:
+  name: icp4adeploy
+  namespace: cp4ba     # This corresponds to infra/namespaces/cloudpak/cp4ba/namespace.yaml
+  labels:
+    app.kubernetes.io/instance: ibm-dba
+    app.kubernetes.io/managed-by: ibm-dba
+    app.kubernetes.io/name: ibm-dba
+    release: "22.0.1" #
+spec:
+  appVersion: 22.0.1  # 
+  ibm_license: accept
+  shared_configuration:
+    no_log: false
+    sc_deployment_fncm_license: non-production
+    sc_deployment_baw_license: non-production
+    sc_deployment_license: non-production
+    image_pull_secrets:
+      - ibm-entitlement-key  # Need to create the external secret in cp4ba namespace for the ibm-entitlement-key
+    show_sensitive_log: true
+    root_ca_secret: cp4ba-root-ca
+    sc_deployment_patterns: ""
+    sc_optional_components: ""
+    sc_deployment_type: production
+    sc_deployment_profile_size: small
+    sc_deployment_platform: "ROKS" # 
+    sc_ingress_enable: false
+    sc_deployment_hostname_suffix: "{{ cp4ba_project_name }}.{{ apps_endpoint_domain }}" # Bash script this to autopopulate this
+    sc_image_repository: cp.icr.io
+    trusted_certificate_list: []
+    sc_install_automation_base: true # Originaly Based on https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/22.0.1?topic=insights-customizing-kafka-elasticsearch-server-configuration,
+    # but that no longer is valid, with false, the automation base connection information for elastic search are not created properly
+    # which then stops processing of the Cloud Pak operator. TODO: Should probably still be false, verify
+    storage_configuration:
+      sc_slow_file_storage_classname: "{{ cp4ba_storage_class_name }}" # Kustomize this
+      sc_medium_file_storage_classname: "{{ cp4ba_storage_class_name }}" # Kustomize this
+      sc_fast_file_storage_classname: "{{ cp4ba_storage_class_name }}" # Kustomize this
+      sc_block_storage_classname: "{{ cp4ba_storage_class_name }}" # Kustomize this
+  ldap_configuration:
+    lc_selected_ldap_type: IBM Security Directory Server
+    lc_ldap_server: "{{ cp4ba_ldap_hostname }}" # Bash script this to autopopulate this
+    lc_ldap_port: "389"
+    lc_bind_secret: ldap-bind-secret
+    lc_ldap_base_dn: dc=cp
+    lc_ldap_ssl_enabled: false
+    lc_ldap_user_name_attribute: "*:cn"
+    lc_ldap_user_display_name_attr: cn
+    lc_ldap_group_base_dn: ou=Groups,dc=cp
+    lc_ldap_group_name_attribute: "*:cn"
+    lc_ldap_group_display_name_attr: cn
+    lc_ldap_group_membership_search_filter: "(|(&(objectclass=groupOfnames)(member={0}))(&(objectclass=groupofuniquenames)(uniquemember={0})))"
+    lc_ldap_group_member_id_map: "groupOfnames:member"
+    tds:
+      lc_user_filter: "(&(cn=%v)(objectclass=inetOrgPerson))"
+      lc_group_filter: "(&(cn=%v)(|(objectclass=groupOfnames)(objectclass=groupofuniquenames)(objectclass=groupofurls)))"
+  datasource_configuration:
+    dc_ssl_enabled: false
