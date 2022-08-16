@@ -1,0 +1,9 @@
+apiVersion: cp4ba.ibm.com/v1
+kind: AutomationUiConfig
+metadata:
+  name: cp4ba
+  namespace: cp4ba
+spec:
+  zenService:
+    storageClass: "ibmc-file-gold-gid"
+    zenCoreMetaDbStorageClass: "ibmc-file-gold-gid"
