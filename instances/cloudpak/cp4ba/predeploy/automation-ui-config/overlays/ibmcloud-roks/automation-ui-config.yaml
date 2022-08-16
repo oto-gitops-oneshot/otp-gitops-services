@@ -1,5 +1,5 @@
-apiVersion: cp4ba.ibm.com/v1
-kind: AutomationUiConfig
+apiVersion: core.automation.ibm.com/v1beta1
+kind: AutomationUIConfig
 metadata:
   name: iaf-system
   namespace: cp4ba
