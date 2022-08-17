@@ -20,8 +20,8 @@ spec:
       - ibm-entitlement-key  # Need to create the external secret in cp4ba namespace for the ibm-entitlement-key
     show_sensitive_log: true
     root_ca_secret: cp4ba-root-ca # Refer to predeploy tasks
-    sc_deployment_patterns: ""
-    sc_optional_components: ""
+    sc_deployment_patterns: "changeme"
+    sc_optional_components: "changeme"
     sc_deployment_type: production
     sc_deployment_profile_size: small
     sc_deployment_platform: "changeme" # Populated in overlays/.../platform.yaml 
