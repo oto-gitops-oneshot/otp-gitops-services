@@ -49,10 +49,10 @@ spec:
     lc_ldap_group_base_dn: ou=Groups,dc=cp
     lc_ldap_group_name_attribute: "*:cn"
     lc_ldap_group_display_name_attr: cn
-    lc_ldap_group_membership_search_filter: "(|(&(objectclass=groupOfnames)(member={0}))(&(objectclass=groupofuniquenames)(uniquemember={0})))"
-    lc_ldap_group_member_id_map: "groupOfnames:member"
+    lc_ldap_group_membership_search_filter: "(|(&(objectclass=groupOfNames)(member={0}))(&(objectclass=groupofuniquenames)(uniquemember={0})))"
+    lc_ldap_group_member_id_map: "groupOfNames:member"
     tds:
       lc_user_filter: "(&(cn=%v)(objectclass=inetOrgPerson))"
-      lc_group_filter: "(&(cn=%v)(|(objectclass=groupOfnames)(objectclass=groupofuniquenames)(objectclass=groupofurls)))"
+      lc_group_filter: "(&(cn=%v)(|(objectclass=groupOfNames)(objectclass=groupofuniquenames)(objectclass=groupofurls)))"
   datasource_configuration:
     dc_ssl_enabled: false
