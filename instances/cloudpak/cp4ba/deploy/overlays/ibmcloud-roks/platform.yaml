@@ -1,0 +1,13 @@
+apiVersion: icp4a.ibm.com/v1
+kind: ICP4ACluster
+metadata:
+  name: icp4adeploy
+  namespace: cp4ba
+spec:
+  shared_configuration:
+    sc_deployment_platform: "ROKS" 
+    storage_configuration:
+      sc_slow_file_storage_classname: "ibmc-file-gold-gid"
+      sc_medium_file_storage_classname: "ibmc-file-gold-gid"
+      sc_fast_file_storage_classname: "ibmc-file-gold-gid"
+      sc_block_storage_classname: "ibmc-file-gold-gid"
