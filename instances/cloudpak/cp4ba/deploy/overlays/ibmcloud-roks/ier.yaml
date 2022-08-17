@@ -13,8 +13,6 @@ spec:
       object_stores:
     ic_icn_init_info:
       icn_repos:
-      icn_desktop:     
+      icn_desktop:
   verify_configuration:
     vc_icn_verification:
-      - vc_icn_repository: ROS
-        vc_icn_desktop_id: ROS
