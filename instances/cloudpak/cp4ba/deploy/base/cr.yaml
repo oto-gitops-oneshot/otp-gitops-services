@@ -17,7 +17,7 @@ spec:
     sc_deployment_baw_license: non-production
     sc_deployment_license: non-production
     image_pull_secrets:
-      - ibm-entitlement-key  # Need to create the external secret in cp4ba namespace for the ibm-entitlement-key
+      - ibm-entitlement-key  # Ensure the external secret in cp4ba namespace for the ibm-entitlement-key is created 
     show_sensitive_log: true
     root_ca_secret: cp4ba-root-ca # Refer to predeploy tasks
     sc_deployment_patterns: "changeme"
