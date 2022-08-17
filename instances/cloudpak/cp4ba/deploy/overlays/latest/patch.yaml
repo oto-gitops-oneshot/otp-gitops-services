@@ -1,0 +1,17 @@
+[
+  {
+    "op": "add",
+    "path": "/spec/datasource_configuration/dc_os_datasources",
+    "value": [
+      {
+        "dc_database_type": "xx",
+        "dc_os_label": "XXX",
+        "dc_common_os_datasource_name": "XXX",
+        "dc_common_os_xa_datasource_name": "XXX",
+        "database_servername": "{{ XXXX }}",
+        "database_name": "XXXX",
+        "database_port": "XXX"
+      }
+        ]
+  }
+]
