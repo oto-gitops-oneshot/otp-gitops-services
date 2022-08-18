@@ -1,0 +1,9 @@
+apiVersion: icp4a.ibm.com/v1
+kind: ICP4ACluster
+metadata:
+  name: icp4adeploy
+  namespace: cp4ba
+spec:
+  resource_registry_configuration:
+    admin_secret_name: resource-registry-admin-secret
+    replica_size: 3 # to fulfill PDB requirement

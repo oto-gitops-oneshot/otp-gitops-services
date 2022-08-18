@@ -1,0 +1,18 @@
+apiVersion: icp4a.ibm.com/v1
+kind: ICP4ACluster
+metadata:
+  name: icp4adeploy
+  namespace: cp4ba
+spec:
+  datasource_configuration:
+    dc_os_datasources:
+  ier_configuration:
+    replica_count: 1
+  initialize_configuration:
+    ic_obj_store_creation:
+      object_stores:
+    ic_icn_init_info:
+      icn_repos:
+      icn_desktop:
+  verify_configuration:
+    vc_icn_verification:

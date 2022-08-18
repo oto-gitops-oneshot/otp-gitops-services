@@ -1,0 +1,25 @@
+apiVersion: icp4a.ibm.com/v1
+kind: ICP4ACluster
+metadata:
+  name: icp4adeploy
+  namespace: cp4ba
+spec:
+  datasource_configuration:
+    dc_icn_datasource:
+      dc_database_type: db2
+      dc_common_icn_datasource_name: ECMClientDS
+      database_servername: "c-db2-db2u.db2.svc.cluster.local" # Bash script to autopopulate this
+      database_port: "50000"
+      database_name: CP4BA
+  navigator_configuration:
+    ban_secret_name: ibm-ban-secret
+    replica_count: 1
+    icn_production_setting:
+      jvm_customize_options: ""
+      icn_table_space: ICNDB_TS
+      copy_files_to_war: navigator_war_filesources.xml
+    auto_scaling:
+      enabled: false
+    # java_mail:
+    #   host: "{{ cp4ba_mail_hostname }}" # Sack this off
+    #   sender: "system@cp.local"
