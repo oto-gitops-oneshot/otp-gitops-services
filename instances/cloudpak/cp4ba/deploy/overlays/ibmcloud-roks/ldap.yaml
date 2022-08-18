@@ -1,0 +1,8 @@
+apiVersion: icp4a.ibm.com/v1
+kind: ICP4ACluster
+metadata:
+  name: icp4adeploy
+  namespace: cp4ba
+spec:
+  ldap_configuration:
+    lc_ldap_server: openldap.openldap.svc.cluster.local # Bash script to auto populate this

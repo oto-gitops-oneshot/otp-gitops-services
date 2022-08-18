@@ -1,0 +1,8 @@
+apiVersion: icp4a.ibm.com/v1
+kind: ICP4ACluster
+metadata:
+  name: icp4adeploy
+  namespace: cp4ba
+spec:
+  shared_configuration:
+    sc_deployment_patterns: "foundation,content"
