@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: certificate-configuration
+  generateName: certificate-configuration
   namespace: cp4ba
 spec:
   template:
