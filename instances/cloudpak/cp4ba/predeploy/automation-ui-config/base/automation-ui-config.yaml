@@ -1,0 +1,22 @@
+# yaml cr here
+apiVersion: core.automation.ibm.com/v1beta1
+kind: AutomationUIConfig
+metadata:
+  name: iaf-system
+  namespace: cp4ba
+spec:
+  description: automation-ui-config for CP4BA Cartridge
+  license:
+    accept: true
+  zen: true
+  version: changeversion
+  tls: 
+    certificateSecret: 
+      secretName: external-tls-secret
+    caSecret:
+      secretName: external-tls-secret
+      key: ca.crt
+  zenService:
+    iamIntegration: true
+    storageClass: kustomizeme
+    zenCoreMetaDbStorageClass: kustomizeme
