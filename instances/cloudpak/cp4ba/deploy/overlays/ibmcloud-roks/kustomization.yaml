@@ -17,6 +17,7 @@ patchesStrategicMerge:
   - ldap.yaml
   - patterns.yaml
   - components.yaml
+  - graphql.yaml
 
 # TODO: Document implementation usage: The database_servernames should be populated in a script
 patches:
