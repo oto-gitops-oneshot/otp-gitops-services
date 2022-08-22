@@ -1,0 +1,23 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: dbs-universal-password
+  namespace: db2
+spec:
+  data:
+    - secretKey: universalPassword
+      remoteRef:
+        key: 23761478-6fbb-c602-c388-9ff012702923
+  refreshInterval: 24h0m0s
+  secretStoreRef:
+    name: cluster
+    kind: ClusterSecretStore
+  target:
+    name: dbs-universal-password
+    creationPolicy: Owner
+    template:
+      type: Opaque
+      data:
+        UNIVERSAL_PASSWORD: |-
+          {{ .universalPassword | toString }}
+        
