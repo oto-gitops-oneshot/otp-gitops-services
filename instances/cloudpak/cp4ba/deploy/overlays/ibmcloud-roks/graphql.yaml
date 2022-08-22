@@ -1,0 +1,12 @@
+apiVersion: icp4a.ibm.com/v1
+kind: ICP4ACluster
+metadata:
+  name: icp4adeploy
+  namespace: cp4ba
+spec:
+  ecm_configuration:
+    graphql:
+      replica_count: 1
+      graphql_production_setting:
+        license_model: FNCM.PVUNonProd
+        enable_graph_iql: true
