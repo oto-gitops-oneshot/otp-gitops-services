@@ -29,7 +29,7 @@ function populate_db_servername()
     fi
 
     # This form of sed should work on both Linux (GNU sed) and Darwin/MacOS.
-    sed -i'' -e 's/'${POP_KEY}:' .*/'${POP_KEY}': "'${POP_VAL}'"/' $POP_FILE
+    sed -i".bak" -e 's/'${POP_KEY}:' .*/'${POP_KEY}': "'${POP_VAL}'"/' $POP_FILE
 
     which oc 2>&1 > /dev/null
     if [ $? -eq 1 ]; then
@@ -47,17 +47,18 @@ fi
 # This is the static target key to patch for this script:
 POP_KEY="database_servername"
 
-# Assuming one is authenticated to the cluster, this grabs the name of the first service found in the 'db2' namespace:
-POP_VAL=$(oc get services -n db2 --output=json | jq '.items[0].metadata.name' | tr -d '"')
+# Assuming one is authenticated to the cluster, this grabs service found in the 'db2' namespace with a port that is named "db2-server":
+POP_VAL=$(oc get services -n db2 --output=json | jq '.items[] | select(.spec.ports[].name | contains("db2-server")) | .metadata.name' | tr -d '"')
 
 if [[ -z ${POP_VAL} ]] ; then
     echo "Error: No servername found."
     exit 1
 fi
 
+# Complete the hostname:
 POP_VAL="${POP_VAL}.db2.svc.cluster.local"
 
-## Update database_servername
+## Update database_servername for the files supplied in the args:
 for POP_FILE in $@; do
     if [ ! -e ${POP_FILE} ]; then
         echo "Error: target file ${POP_FILE} does not exist."
