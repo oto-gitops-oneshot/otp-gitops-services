@@ -29,13 +29,8 @@ function populate_db_servername()
     fi
 
     # This form of sed should work on both Linux (GNU sed) and Darwin/MacOS.
-    sed -i".bak" -e 's/'${POP_KEY}:' .*/'${POP_KEY}': "'${POP_VAL}'"/' $POP_FILE
-
-    which oc 2>&1 > /dev/null
-    if [ $? -eq 1 ]; then
-        echo "Error: 'oc' command not found in PATH. This is needed to query the db2 service in the db2 namespace."
-        exit 1
-    fi
+    sed -i'.bak' -e 's/'${POP_KEY}:' .*/'${POP_KEY}': "'${POP_VAL}'"/' $POP_FILE && rm ${POP_FILE}.bak
+    
 }
 
 ## Main
@@ -47,11 +42,22 @@ fi
 # This is the static target key to patch for this script:
 POP_KEY="database_servername"
 
-# Assuming one is authenticated to the cluster, this grabs service found in the 'db2' namespace with a port that is named "db2-server":
-POP_VAL=$(oc get services -n db2 --output=json | jq '.items[] | select(.spec.ports[].name | contains("db2-server")) | .metadata.name' | tr -d '"')
+# Check that we have oc command available
+which oc 2>&1 > /dev/null
+if [ $? -eq 1 ]; then
+    echo "Error: 'oc' command not found in PATH. This is needed to query the db2 service in the db2 namespace."
+    exit 1
+fi
+
+# Assuming one is authenticated to the cluster, this grabs service found in the 'db2' namespace
+# with a port that is named exactly "db2-server":
+POP_VAL=$(oc get services -n db2 --output=json | jq '.items[] | select(.spec.ports[].name | test("^db2-server$")) | .metadata.name' | tr -d '"')
 
 if [[ -z ${POP_VAL} ]] ; then
     echo "Error: No servername found."
+    exit 1
+elif [[ $(echo $POP_VAL | wc -w) -gt 1 ]]; then
+    echo "Error: Multiple services with port 'db2-server' (port 5000)."
     exit 1
 fi
 

@@ -26,4 +26,4 @@ if [ $(grep -c ${POP_KEY} ${POP_FILE}) -eq 0 ] ; then
 fi
 
 # This form of sed should work on both Linux (GNU sed) and Darwin/MacOS.
-sed -i'' -e 's/'${POP_KEY}:' .*/'${POP_KEY}': "'${POP_VAL}'"/' $POP_FILE
+sed -i'.bak' -e 's/'${POP_KEY}:' .*/'${POP_KEY}': "'${POP_VAL}'"/' $POP_FILE && rm -f ${POP_FILE}.bak
