@@ -11,9 +11,10 @@ spec:
         image: quay.io/langley_millard_ibm/<repo> # location the image is pushed to i.e. quay.io/langley_millard_ibm/repo_name
         command: ["./postdeploy_script"]
         env:
+        - name: POSTDEPLOY_CONFIG_LIST
+          value: "ZEN,IER,IER-TM,TM"
         - name: KUBECONFIG
           value: "/tmp/config"
-        args: ["-i", "ZEN,IER,IER-TM,TM"]
         imagePullPolicy: Always
       restartPolicy: OnFailure
   backoffLimit: 2
