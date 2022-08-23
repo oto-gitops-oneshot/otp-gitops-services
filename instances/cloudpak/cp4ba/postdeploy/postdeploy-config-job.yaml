@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
       - name: postdeploy-configuration
-        image: quay.io/langley_millard_ibm/<repo> # location the image is pushed to i.e. quay.io/langley_millard_ibm/repo_name
+        image: quay.io/langley_millard_ibm/cp4ba-postdeploy-config # location the image is pushed to i.e. quay.io/langley_millard_ibm/repo_name
         command: ["./postdeploy_script"]
         env:
         - name: POSTDEPLOY_CONFIG_LIST
