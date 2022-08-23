@@ -1,1 +1,16 @@
-# yaml file here for route (need to populate this with sh script or helm etc )
+apiVersion: v1
+kind: Route
+metadata:
+  name: ierconfig
+  annotations:
+    haproxy.router.openshift.io/balance: roundrobin
+    haproxy.router.openshift.io/timeout: 3000s
+    router.openshift.io/sticky_cookie: -sticky_cookie_annotation
+spec:
+  host: "ierconfig-{{ cp4ba_project_name }}.{{ apps_endpoint_domain }}" # CHANGE ME TO BE REAL WITH A SCRIPT ETC (SWAP THE JINJA)
+  to:
+    kind: Service
+    name: "{{ cp4ba_cr_meta_name }}-cpe-svc" # SAME GOES FOR HERE - SWAP THE JINJA FOR REAL VALUES
+  port:
+    targetPort: http
+  wildcardPolicy: None  
