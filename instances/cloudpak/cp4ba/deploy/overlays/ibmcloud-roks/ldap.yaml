@@ -5,4 +5,4 @@ metadata:
   namespace: cp4ba
 spec:
   ldap_configuration:
-    lc_ldap_server: openldap.openldap.svc.cluster.local # Bash script to auto populate this
+    lc_ldap_server: "openldap.openldap.svc.cluster.local"
