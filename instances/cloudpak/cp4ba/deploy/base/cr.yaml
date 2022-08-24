@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/name: ibm-dba
     release: "22.0.1" 
   annotations:
-     ansible.sdk.operatorframework.io/verbosity: "7"
+     ansible.sdk.operatorframework.io/verbosity: "3"
 spec:
   appVersion: changeme  # Poplulated in overlays/.../platform.yaml
   ibm_license: accept
