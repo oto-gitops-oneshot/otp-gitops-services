@@ -58,20 +58,16 @@ fi
 
 # The following jinja variables need to be patched with real values:
 # 1. cp4ba_project_name <-- NAMESPACE, given arg
-
 # 2. apps_endpoint_domain:
 DOMAIN=$(oc describe console/cluster  | awk -F. '/Console URL/{for (i=2;i<NF;i++) printf("%s.",$i); print $NF}' | tr -d '"')
-
 # 3. cp4ba_cr_meta_name:
 icp4a_cluster=$(oc get ICP4ACluster -n ${NAMESPACE} |  awk '{if (NR==1) for(i=1;i<=NF;i++) if ($i=="NAME") column=i; if (NR>1) print $column}')
 CP4BA_CR_META_NAME=$(oc get ICP4ACluster -n ${NAMESPACE} ${icp4a_cluster} -o jsonpath='{$.metadata.name}')
 
-cat<<EOF
-Replacing the following jinja vars in the target file(s):
-1. cp4ba_project_name <-- ${NAMESPACE}
-2. apps_endpoint_domain <-- ${DOMAIN}
-3. cp4ba_cr_meta_name <-- ${CP4BA_CR_META_NAME}
-EOF
+# Replacing the following jinja vars in the target file(s):
+# 1. cp4ba_project_name <-- ${NAMESPACE}
+# 2. apps_endpoint_domain <-- ${DOMAIN}
+# 3. cp4ba_cr_meta_name <-- ${CP4BA_CR_META_NAME}
 
 # Make sure we have a valid value to patch with, and no ambiguity on which service to refer to:
 if [[ -z ${DOMAIN} ]] ; then
