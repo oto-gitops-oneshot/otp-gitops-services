@@ -460,28 +460,28 @@ customLdifFiles:
     objectClass: groupOfNames
     objectClass: top
     cn: cpadmins
-    member: uid=cpadmin,ou=Users,dc=cp
-    member: uid=cpadmin1,ou=Users,dc=cp
-    member: uid=cpadmin2,ou=Users,dc=cp
+    member: cn=cpadmin,ou=Users,dc=cp
+    member: cn=cpadmin1,ou=Users,dc=cp
+    member: cn=cpadmin2,ou=Users,dc=cp
 
     dn: cn=cpusers,ou=Groups,dc=cp
     objectClass: groupOfNames
     objectClass: top
     cn: cpusers
-    member: uid=cpadmin,ou=Users,dc=cp
-    member: uid=cpadmin1,ou=Users,dc=cp
-    member: uid=cpadmin2,ou=Users,dc=cp
-    member: uid=cpuser,ou=Users,dc=cp
-    member: uid=cpuser1,ou=Users,dc=cp
-    member: uid=cpuser2,ou=Users,dc=cp
+    member: cn=cpadmin,ou=Users,dc=cp
+    member: cn=cpadmin1,ou=Users,dc=cp
+    member: cn=cpadmin2,ou=Users,dc=cp
+    member: cn=cpuser,ou=Users,dc=cp
+    member: cn=cpuser1,ou=Users,dc=cp
+    member: cn=cpuser2,ou=Users,dc=cp
 
     dn: cn=cpusers1,ou=Groups,dc=cp
     objectClass: groupOfNames
     objectClass: top
     cn: cpusers1
-    member: uid=cpuser,ou=Users,dc=cp
-    member: uid=cpuser1,ou=Users,dc=cp
-    member: uid=cpuser2,ou=Users,dc=cp
+    member: cn=cpuser,ou=Users,dc=cp
+    member: cn=cpuser1,ou=Users,dc=cp
+    member: cn=cpuser2,ou=Users,dc=cp
 
     # Users
     dn: cn=cpadmin,ou=Users,dc=cp
