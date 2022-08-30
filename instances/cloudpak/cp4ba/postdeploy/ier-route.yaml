@@ -7,7 +7,7 @@ metadata:
     haproxy.router.openshift.io/timeout: 3000s
     router.openshift.io/sticky_cookie: -sticky_cookie_annotation
 spec:
-  host: "ierconfig-cp4ba.itzroks-666000qmn3-nnxtkk-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud"
+  host: "https://ierconfig-cp4ba.itzroks-666000qmn3-nnxtkk-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud"
   to:
     kind: Service
     name: "icp4adeploy-cpe-svc"
