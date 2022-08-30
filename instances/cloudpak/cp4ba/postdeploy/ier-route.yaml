@@ -14,4 +14,3 @@ spec:
   port:
     targetPort: http
   wildcardPolicy: None  
-  # adding comment here to see if this is potentially argo fckery 
