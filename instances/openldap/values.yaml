@@ -17,8 +17,8 @@ global:
   storageClass: ""
   ldapDomain: "cp"
   ## Default Passwords to use, stored as a secret. Not used if existingSecret is set.
-  adminPassword: Not@SecurePassw0rd
-  configPassword: Not@SecurePassw0rd
+  adminPassword: pa55word
+  configPassword: pa55word
 
 ## @section Common parameters
 
@@ -483,7 +483,7 @@ customLdifFiles:
     sn: cpadmin
     uid: cpadmin
     mail: cpadmin@cp.local
-    userpassword: Not@SecurePassw0rd
+    userpassword: pa55word
     employeeType: admin
 
     dn: cn=cpadmin1,ou=Users,dc=cp
@@ -493,7 +493,7 @@ customLdifFiles:
     sn: cpadmin1
     uid: cpadmin1
     mail: cpadmin1@cp.local
-    userpassword: Not@SecurePassw0rd
+    userpassword: pa55word
     employeeType: admin
 
     dn: cn=cpadmin2,ou=Users,dc=cp
@@ -503,7 +503,7 @@ customLdifFiles:
     sn: cpadmin2
     uid: cpadmin2
     mail: cpadmin2@cp.local
-    userpassword: Not@SecurePassw0rd
+    userpassword: pa55word
     employeeType: admin
 
     dn: cn=cpuser,ou=Users,dc=cp
@@ -513,7 +513,7 @@ customLdifFiles:
     sn: cpuser
     uid: cpuser
     mail: cpuser@cp.local
-    userpassword: Not@SecurePassw0rd
+    userpassword: pa55word
 
     dn: cn=cpuser1,ou=Users,dc=cp
     objectClass: inetOrgPerson
@@ -522,7 +522,7 @@ customLdifFiles:
     sn: cpuser1
     uid: cpuser1
     mail: cpuser1@cp.local
-    userpassword:: Not@SecurePassw0rd
+    userpassword:: pa55word
 
     dn: cn=cpuser2,ou=Users,dc=cp
     objectClass: inetOrgPerson
@@ -531,6 +531,6 @@ customLdifFiles:
     sn: cpuser2
     uid: cpuser2
     mail: cpuser2@cp.local
-    userpassword: Not@SecurePassw0rd
+    userpassword: pa55word
 
    
