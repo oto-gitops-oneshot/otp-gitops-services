@@ -9,3 +9,18 @@ spec:
   installPlanApproval: Automatic
   source: ibm-cp4a-operator-catalog
   sourceNamespace: openshift-marketplace
+  startingCSV: ibm-cp4a-operator.v22.1.0
+
+---
+
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-common-service-operator
+  namespace: ibm-common-services
+spec:
+  channel: changeme_version
+  installPlanApproval: Automatic
+  name: ibm-common-service-operator
+  source: opencloud-operators
+  sourceNamespace: openshift-marketplace

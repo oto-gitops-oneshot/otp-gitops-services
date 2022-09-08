@@ -14,3 +14,10 @@ patches:
       - op: replace
         path: /spec/channel
         value: 'v22.1'
+  - target:
+      kind: Subscription
+      name: ibm-common-service-operator
+    patch: |-
+      - op: replace
+        path: /spec/channel
+        value: 'v3'
