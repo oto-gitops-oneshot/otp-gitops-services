@@ -9,7 +9,7 @@ spec:
       serviceAccountName: ibm-cp4a-operator
       containers:
       - name: patterns-healthcheck
-        image: quay.io/mikhail_nikitin1/cp4ba_health_check # image to pull
+        image: quay.io/marwan_attar_ibm/cp4ba_health_checks # image to pull
         command: ["/bin/bash"]
         env:
         - name: KUBECONFIG
@@ -32,7 +32,7 @@ spec:
       serviceAccountName: ibm-cp4a-operator
       containers:
       - name: options-healthcheck
-        image: quay.io/mikhail_nikitin1/cp4ba_health_check # image to pull
+        image: quay.io/marwan_attar_ibm/cp4ba_health_checks # image to pull
         command: ["/bin/bash"]
         env:
         - name: KUBECONFIG
