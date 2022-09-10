@@ -6,7 +6,7 @@ metadata:
 spec:
   ecm_configuration:
     tm:
-      replica_count: 1git 
+      replica_count: 1
       tm_production_setting:
         # Based on https://www.ibm.com/docs/en/enterprise-records/5.2.1?topic=in-configuring-content-navigator-task-manager-enterprise-records
         tm_job_url: "https://cpd-cp4ba.itzroks-666000qmn3-16huwr-6ccd7f378ae819553d37d5f2ee142bd6-0000.jp-tok.containers.appdomain.cloud/ier/EnterpriseRecordsPlugin/IERApplicationPlugin.jar"
