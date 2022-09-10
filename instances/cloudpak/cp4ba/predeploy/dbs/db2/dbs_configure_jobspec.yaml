@@ -10,7 +10,7 @@ spec:
       serviceAccountName: db2-configure-sa
       containers:
       - name: dbs-config
-        image: quay.io/langley_millard_ibm/cp4ba-configure-dbs # location the image is pushed to i.e. quay.io/langley_millard_ibm/repo_name
+        image: quay.io/marwan_attar_ibm/cp4ba-dbs-init # location the image is pushed to i.e. quay.io/langley_millard_ibm/repo_name
         command: ["./create_db.sh"]
         env:
         - name: CP4BA_NAMESPACE
