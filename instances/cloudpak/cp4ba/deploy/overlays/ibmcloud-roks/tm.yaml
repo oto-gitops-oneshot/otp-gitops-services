@@ -9,7 +9,9 @@ spec:
       replica_count: 1
       tm_production_setting:
         # Based on https://www.ibm.com/docs/en/enterprise-records/5.2.1?topic=in-configuring-content-navigator-task-manager-enterprise-records
-        tm_job_url: "https://cpd-cp4ba.itzroks-666000qmn3-zum4zg-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud/ier/EnterpriseRecordsPlugin/IERApplicationPlugin.jar"
+        # The publicly routable domain may not be needed. Can use the internal service construct instead, and it is created as part of the CR
+        # process, but is instantiated well before the TM Deployment (about 45 mins before).
+        tm_job_url: "https://ibm-nginx-svc.cp4ba.svc.cluster.local/ier/EnterpriseRecordsPlugin/IERApplicationPlugin.jar"
         security_roles_to_group_mapping:
           task_admins:
             groups: [cpadmins]
