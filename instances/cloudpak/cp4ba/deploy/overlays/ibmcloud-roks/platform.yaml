@@ -7,7 +7,9 @@ spec:
   appVersion: 22.0.1
   shared_configuration:
     sc_deployment_platform: "ROKS" 
-    sc_deployment_hostname_suffix: "cp4ba.itzroks-666000qmn3-zum4zg-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud"
+    # sc_deployment_hostname_suffix not required. Please see: 
+    # 1) https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/22.0.1?topic=scp-shared-configuration
+    # 2) https://www.ibm.com/docs/en/filenet-p8-platform/5.5.x?topic=operators-shared-parameters
     storage_configuration:
       sc_slow_file_storage_classname: "ibmc-file-gold-gid"
       sc_medium_file_storage_classname: "ibmc-file-gold-gid"
