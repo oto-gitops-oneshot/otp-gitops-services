@@ -83,3 +83,8 @@ A successful login renders the users and groups constituting this active directo
 
 In a production setting, the customer's active directory server would most likely be used, as opposed to this custom LDAP deployment.
 
+### CP4BA - Pre-deployment Applications
+
+As per the name, a number of steps need to be performed prior to the deployment of the CP4BA custom resource. These steps are contained within scripts encapsulated inside docker containers running as K8's jobs. The highlighted entries shown below map to predefined K8's jobs triggered to run at the appropriate time during the provisioning.
+
+![Parent - Services - Predeploy - Kustomize](Images/Kustomize_Predeploy.png)
