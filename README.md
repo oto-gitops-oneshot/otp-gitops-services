@@ -99,7 +99,22 @@ The last highlighted entry in the figure above creates the secret required by an
 
 ### CP4BA - Deployment
 
-TODO: Fill this out
+This is the meat and bones of the application, triggered to begin deployment following successful completion of the pre deployment tasks mentioned above. This is fully contained as a YAML specification describing the required state of the deployment, and is found in the **instances/cloudpak/cp4ba/deploy** directory. The "base" custom resource is defined in the **cr.yaml** file located in the **base** sub-directory. This base file is quite minimal, and for good reason, as explained shortly. The yaml's describing the different components constituting the cloud pak are defined in the **overlays/ibmcloud-roks** directory. For instance, the following components, amongst others, are defined as yaml's:
+
+1) GraphQL
+2) CPE
+3) CSS
+4) TM
+
+We provide a framework whereby the components an operator wishes to deploy can be easily "toggled" on and off simply by commenting and uncommenting the entries found in the **kustomization.yaml** file found in the aforementioned **overlays/ibmcloud-roks** sub-directory. For instance, if an operator wishes to deploy all components, the YAML would be as such:
+
+![Parent - Services - Deploy - Kustomize - All](Images/Kustomize_Deploy_All.png)
+
+If BAN and CPE were not required, the corresponding entries are simply commented out:
+
+![Parent - Services - Deploy - Kustomize - Some](Images/Kustomize_Deploy_Some.png)
+
+At the time of writing, not all components are supported. Inclusion of the other components constituting this CloudPak is the eventual end state. That said, the procedure is quite straightforward. Describe the YAML spec for that component, and add the entry to the kustomization file.
 
 ### CP4BA - Postdeployment Application
 
@@ -107,4 +122,4 @@ As per the name, a number of steps need to be performed following the deployment
 
 ![Parent - Services - Predeploy - Kustomize](Images/Kustomize_Postdeploy.png)
 
-This [README](link here) offer a deeper insight into the automation carried out by the post deployment job.
+This [README](link here) offers a deeper insight into the automation carried out by the post deployment job.
