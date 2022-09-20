@@ -64,3 +64,20 @@ The relevant objects defining the DB2 deployment assets are housed in the **inst
 You may recall the pull secret required to pull the image is defined in the **pull-secret.yaml** file in the **instances/db2/create/base** directory. Populating this was discussed in the pre-requisite steps as given [here](https://github.com/oto-gitops-oneshot#prerequisite---secret-creation).
 
 In either case, maintainers simply need to update the spec.version **db2ucluster.yaml** file found in the **instances/db2/create/overlays/** directory in the event of new updates, provided the relevant changes are made upstream in the **operators/db2** directory of course.
+
+### Openldap - Instance
+
+There is no operator deployment here, as opposed to DB2. All objects are defined as a Helm Chart located in the **instances/openldap** directory. This Helm chart is quite involved containing a multitude of components. As such, only the relevant components are outlined here.
+
+The **values.yaml** found within the **instances/openldap** directory contains an "existingSecret" field, as seen in line 61. If value associated with this field is empty, the passwords defined in lines 19 and 20 are used instead. If the value is non empty (as in our case), a pre-existing secret, given by the value, is used instead. This pre-existing secret is defined in the **external-admin-secret** file. Note the Helm conditional locted up the top as given below. This secret is only instantiated in the event the existingSecret field in the aforementioned values file is non empty.
+
+![Parent - Services - OpenLDAP - Secret](Images/LDAP_Existing_Secret.png)
+
+The "adminPassword" portion of this secret defines the LDAP Adminstrator password required to login, as shown below. The URL exposing this service is defined **edgeroute.yaml** found in the **instances/openldap/templates** directory. Put simply, it is a route exposed in the **openldap** namespace. The username is prepopulated.
+
+![Parent - Services - OpenLDAP - UI](Images/LDAP_UI.png)
+
+A successful login shows the users and groups constituting this active directory. These entities are defined in the "customLdifFiles" stanza within the **values.yaml** located in the **instances/openldap**. The users defined are ultimately federated as CP4BA users. 
+
+In a production setting, the customer's active directory server would most likely be used, as opposed to this custom LDAP deployment.
+
