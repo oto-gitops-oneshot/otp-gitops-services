@@ -85,7 +85,7 @@ In a production setting, the customer's active directory server would most likel
 
 ### CP4BA - Predeployment Applications
 
-As per the name, a number of steps need to be performed prior to the deployment of the CP4BA custom resource. These steps are contained within scripts encapsulated inside docker containers running as K8's jobs. The highlighted entries shown below map to predefined K8's jobs triggered to run at the appropriate time during the provisioning process.
+As per the name implies, a number of steps need to be performed prior to the deployment of the CP4BA custom resource. These steps are contained within scripts encapsulated inside docker containers running as K8's jobs. The highlighted entries shown below map to predefined K8's jobs triggered to run at the appropriate time during the provisioning process.
 
 ![Parent - Services - Predeploy - Kustomize](Images/Kustomize_Predeploy.png)
 
@@ -97,6 +97,9 @@ The following README's, found in the relevant directories within the job reposit
 
 The last highlighted entry in the figure above creates the secret required by and each every deployed service of this asset. A detailed overview is given [here](https://github.com/oto-gitops-oneshot#prerequisite---secret-creation)
 
+### CP4BA - Deployment
+
+TODO: Fill this out
 
 ### CP4BA - Postdeployment Application
 
@@ -104,4 +107,4 @@ As per the name, a number of steps need to be performed following the deployment
 
 ![Parent - Services - Predeploy - Kustomize](Images/Kustomize_Postdeploy.png)
 
-This [README](link here) offer a deeper insight into the automation carried out by the post deployment job
+This [README](link here) offer a deeper insight into the automation carried out by the post deployment job.
