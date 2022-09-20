@@ -57,3 +57,9 @@ The contents of the previous section also apply here. Again, please note we are 
 The following [link](https://www.ibm.com/docs/en/db2/11.5?topic=SSEPGG_11.5.0/com.ibm.db2.luw.db2u_openshift.doc/doc/t_db2u_install_op_catalog.html) contains the CatalogSource specification. The Subscription is not given in the link. We "reverse-engineered" it by deploying the operator manually via the OpenShift UI and retrieving the Subscription object created as a consequence.
 
 
+### DB2 - Instance
+
+The relevant objects defining the DB2 deployment assets are housed in the **instances/db2/create** directory. We use, again, the kustomize framework to tailor each deployment given the deployment platform. The DB2UCluster CR requires a storageClassName field, which is a function of the target hyperscaler. We have tested this against ROKS, hence the presence of the **ibmcloud-roks** directory, which overrides both the version and the storageClassName accordingly. Perhaps the changes should have split across multiple files, as opposed to one to make it clear what each file is responsible for.
+
+You may recall the pull secret required to pull the image is defined in the **pull-secret.yaml** file in the **instances/db2/create/base** directory. Populating this was discussed in the pre-requisite steps as given [here](https://github.com/oto-gitops-oneshot#prerequisite---secret-creation).
+
