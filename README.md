@@ -103,9 +103,9 @@ As per the name implies, a number of steps need to be performed prior to the dep
 
 The following README's, found in the relevant directories within the job repository, provide a deeper insight into the automation carried by each job:
 
-1) [db2-configuration](link here)
-2) [dbs=cp4ba-configuration](link here)
-3) [global-ca](link here)
+1) [db2-configuration](https://github.com/oto-gitops-oneshot/cp4ba-config-jobs/tree/main/db2#db2-configuration-job)
+2) [dbs-cp4ba-configuration](https://github.com/oto-gitops-oneshot/cp4ba-config-jobs/tree/main/dbs)
+3) [global-ca](https://github.com/oto-gitops-oneshot/cp4ba-config-jobs/tree/main/predeploy-cert-config)
 
 The last highlighted entry in the figure above creates the secret required by and each every deployed service of this asset. The steps required to carry this out should have already been completed as outlined [here].(https://github.com/oto-gitops-oneshot#prerequisite---secret-creation)
 
@@ -134,4 +134,4 @@ As per the name, a number of steps need to be performed following the deployment
 
 ![Parent - Services - Predeploy - Kustomize](Images/Kustomize_Postdeploy.png)
 
-This [README](link here) offers a deeper insight into the automation carried out by the post deployment job.
+This [README](https://github.com/oto-gitops-oneshot/cp4ba-config-jobs/tree/main/postdeploy-config) offers a deeper insight into the automation carried out by the post deployment job.
