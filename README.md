@@ -36,9 +36,19 @@ The applications are stood in a particular order, as dictated by [ArgoCD Sync Wa
 
 ### CP4BA - Operators
 
-The CP4BA CatalogSources and Subscription objects, as defined in the kustomization file given in the section above are found in the **operators/cloudpak/cp4ba-operator** directory of this repository. Therein lies the CatalogSources and Subscription objects, each allocated to it's corresponding sub-directory. We use the [Kustomize framework](https://kustomize.io) to standardise the method around which updates are to be performed upon the subscription channels and catalogSources, in the event future versions of this asset are exposed to the public for consumption. As an example, consider the **catalogsource.yaml** file found in the **operators/cloudpak/cp4ba-operator/catalog-sources/base** directory. The image field of each CatalogSource object within contains a reference to the location of the actual image in the icr repository. These references are defined in the **kustomization.yaml** file located in the **operators/cloudpak/cp4ba-operator/catalog-sources/overlays/latest** directory. Simply update the values found in this file in accordance to the requirements laid out in future versions. 
+The CP4BA CatalogSources and Subscription objects, as defined in the kustomization file given in the section above are found in the **operators/cloudpak/cp4ba-operator** directory of this repository. Therein lies the CatalogSources and Subscription objects, each allocated to it's corresponding sub-directory. We use the [Kustomize framework](https://kustomize.io) to standardise the method around which updates are to be performed upon the subscription channels and catalogSources, in the event future versions of this asset are exposed to the public for consumption. As an example, consider the [CatalogSource](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/operators/cloudpak/cp4ba-operator/catalog-sources/base/catalogsource.yaml) file found in the catalog source base [directory](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/operators/cloudpak/cp4ba-operator/catalog-sources/base). The image field of each CatalogSource object within contains a reference to the location of the actual image in the icr repository. These references are defined in the [kustomization](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/operators/cloudpak/cp4ba-operator/catalog-sources/overlays/latest/kustomization.yaml) file located in the overlays [directory](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/operators/cloudpak/cp4ba-operator/catalog-sources/overlays/latest). Simply update the values found in this file in accordance to the requirements laid out in future versions.
 
-On a similar note, maintainers would simply update the **kustomization.yaml** file found in the **operators/cloudpak/cp4ba-operator/subscription/overlays/latest** to update the subscription channel, which would override the spec.channel field present in the **subscription.yaml** file located in the **operators/cloudpak/cp4ba-operator/catalog-sources/base/** directory.
+For instance, assuming a new version of "ibm-cp4a-operator-catalog" was released. The highlighted line below would be updated:
+
+![Parent - Services - Kustomize - CatalogSource - Update](Images/Kustomization_Update_Overlays.png)
+
+Which would, in turn, update the highlighted line in the base catalog source object, once Kustomize is triggered to build of course:
+
+![Parent - Services - Kustomize - CatalogSource - Update](Images/Kustomization_Update_Base.png)
+
+Better yet, an entirely new sub-directory can be created in the overlays directory, aptly named the version number (or id) as opposed to latest (which is 22.0.1 as of the time of writing). This renders it more maintainable, and allows easy rollbacks if necessary.
+
+On a similar note, maintainers would simply update the [kustomization](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/operators/cloudpak/cp4ba-operator/subscription/overlays/latest/kustomization.yaml) file found in the overlays [directory](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/operators/cloudpak/cp4ba-operator/subscription/overlays/latest) to update the subscription channel, which would override the spec.channel field present in the [subscription](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/operators/cloudpak/cp4ba-operator/subscription/base/subscription.yaml) file located in the [base](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/operators/cloudpak/cp4ba-operator/subscription/base) directory.
 
 As of the time of writing, we are using the latest stable version of CP4BA - that is, 22.0.1. The aformentioned YAML's were obtained from the official documentation:
 
@@ -47,7 +57,7 @@ As of the time of writing, we are using the latest stable version of CP4BA - tha
 
 Note the links given above point to the latest stable version currently supported at the time of writing. Newer versions/links will likely be available, depending on the delta on when you read this and when the last update to this page was made.
 
-In either case, the case package link contains the YAML files, and the procedure link explains how they are used.
+In either case, the case package link contains the YAML files, and the procedure link explains how they are used. We simply adapted to fit in our framework.
 
 
 ### DB2 - Operators
@@ -59,27 +69,27 @@ The following [link](https://www.ibm.com/docs/en/db2/11.5?topic=SSEPGG_11.5.0/co
 
 ### DB2 - Instance
 
-The relevant objects defining the DB2 deployment assets are housed in the **instances/db2/create** directory. We use, again, the kustomize framework to tailor each deployment given the deployment platform. The DB2UCluster custom resource requires a storageClassName field, which is a function of the target hyperscaler. We have tested this against ROKS, hence the presence of the **ibmcloud-roks** directory. The **db2u-cluster.yaml** object within overrides both the version and the storageClassName accordingly. Perhaps the changes should have split across multiple files, as opposed to one to make it clear what each file is responsible for. Future work would entail structuring this in a more cohesive manner as described earlier, in addition to testing deployments to other platforms, namely AWS and Azure.
+The relevant objects defining the DB2 deployment assets are housed in the [db2](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/db2/create) directory. We use, again, the kustomize framework to tailor each deployment given the deployment platform. The DB2UCluster custom resource requires a storageClassName field, which is a function of the target hyperscaler. We have tested this against ROKS, hence the presence of the [ibmcloud-roks](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/db2/create/overlays/ibmcloud-roks) directory. The [DB2UCluster](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/db2/create/overlays/ibmcloud-roks/db2ucluster.yaml) object within overrides both the version and the storageClassName accordingly. Perhaps the changes should have split across multiple files, as opposed to one to make it clear what each file is responsible for. Future work would entail structuring this in a more cohesive manner as described earlier, in addition to testing deployments to other platforms, namely AWS and Azure.
 
-You may recall the pull secret required to pull the image is defined in the **pull-secret.yaml** file in the **instances/db2/create/base** directory. Populating this constituted part of the pre-requisite steps as outlined [here](https://github.com/oto-gitops-oneshot#prerequisite---secret-creation).
+You may recall the pull secret required to pull the image is defined in the [pull-secret](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/db2/create/base/pull-secret.yaml) file in the db2 [base](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/db2/create/base) directory. Populating this constituted part of the pre-requisite steps as outlined [here](https://github.com/oto-gitops-oneshot#prerequisite---secret-creation).
 
-In either case, maintainers simply need to update the spec.version **db2ucluster.yaml** file found in the **instances/db2/create/overlays/** directory in the event of new updates, provided the relevant changes are made upstream in the **operators/db2** directory of course.
+In either case, maintainers simply need to update the spec.version in the [DB2UCluster](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/db2/create/overlays/ibmcloud-roks/db2ucluster.yaml) file found in the [ibmcloud-roks](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/db2/create/overlays/ibmcloud-roks) directory in the event of new updates, provided the relevant changes are made upstream in the [operators db2](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/operators/db2) directory of course.
 
 ### Openldap - Instance
 
-This is not an operator based deployment, as opposed to DB2. All objects are defined as a Helm Chart located in the **instances/openldap** directory. This Helm chart is quite involved containing a multitude of components. As such, only the relevant components are outlined here.
+This is not an operator based deployment, as opposed to DB2. All objects are defined as a Helm Chart located in the openldap [instance](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/openldap) directory. This Helm chart is quite involved containing a multitude of components. As such, only the relevant components are outlined here.
 
-The **values.yaml** found within the **instances/openldap** directory contains an "existingSecret" field, as seen in line 61. If the value associated with this field is empty, the passwords defined in lines 19 and 20 are used instead. If the value is non empty (as in our case), a pre-existing secret, given by the assigned value, is used instead. Note the name assigned is "openldap", and this name coincides with the pre-existing secret defined in the **external-admin-secret** file. Note the Helm conditional located up the top as given below. This secret is only instantiated in the event the existingSecret field in the aforementioned values file is non empty.
+The [values](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/openldap/values.yaml) file found within the [openldap](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/openldap) directory contains an "existingSecret" field, as seen in line 61. If the value associated with this field is empty, the passwords defined in lines 19 and 20 are used instead. If the value is non empty (as in our case), a pre-existing secret, given by the assigned value, is used instead. Note the name assigned is "openldap", and this name coincides with the pre-existing secret defined in the [external-admin-secret](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/openldap/templates/external-admin-secret.yaml) file. Note the Helm conditional located up the top as given below. This secret is only instantiated in the event the existingSecret field in the aforementioned values file is non empty.
 
-Populating the secret defined in **external-admin-secret** constituted part of the pre-requisite steps as outlined [here](https://github.com/oto-gitops-oneshot#prerequisite---secret-creation).
+Populating the secret defined in [external-admin-secret](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/openldap/templates/external-admin-secret.yaml) constituted part of the pre-requisite steps as outlined [here](https://github.com/oto-gitops-oneshot#prerequisite---secret-creation).
 
 ![Parent - Services - OpenLDAP - Secret](Images/LDAP_Existing_Secret.png)
 
-The "adminPassword" portion of this secret defines the LDAP Adminstrator password required to login, as shown below. The URL exposing this service is defined in the **edgeroute.yaml** file located in the **instances/openldap/templates** directory. Put simply, it is a route exposed in the **openldap** namespace. The username is prepopulated, and should be left intact.
+The "adminPassword" portion of this secret defines the LDAP Adminstrator password required to login, as shown below. The URL exposing this service is defined in the [edgeroute](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/openldap/templates/edgeroute.yaml) file located in the outer [templates](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/openldap/templates) directory. Put simply, it is a route exposed in the **openldap** namespace. The username is prepopulated, and should be left intact.
 
 ![Parent - Services - OpenLDAP - UI](Images/LDAP_UI.png)
 
-A successful login renders the users and groups constituting this active directory. These entities are defined in the "customLdifFiles" stanza of the **values.yaml** located in the **instances/openldap**. The users defined are ultimately federated as CP4BA users. 
+A successful login renders the users and groups constituting this active directory. These entities are defined in the "customLdifFiles" stanza of the [values](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/openldap/values.yaml). The users defined are ultimately federated as CP4BA users. 
 
 In a production setting, the customer's active directory server would most likely be used, as opposed to this custom LDAP deployment.
 
@@ -99,18 +109,18 @@ The last highlighted entry in the figure above creates the secret required by an
 
 ### CP4BA - Deployment
 
-This is the meat and bones of the application, triggered to begin deployment following successful completion of the pre deployment tasks mentioned above. This is fully contained as a YAML specification describing the required state of the deployment, and is found in the **instances/cloudpak/cp4ba/deploy** directory. The "base" custom resource is defined in the **cr.yaml** file located in the **base** sub-directory. This base file is quite minimal, and for good reason, as explained shortly. The yaml's describing the different components constituting the cloud pak are defined in the **overlays/ibmcloud-roks** directory. For instance, the following components, amongst others, are defined as yaml's:
+This is the meat and bones of the application, deployment is triggered following successful completion of the pre deployment tasks mentioned above. This is fully contained as a YAML specification describing the required state of the deployment, and is found in the [deploy](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/cloudpak/cp4ba/deploy) directory. The base custom resource is defined in the [cr](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/cloudpak/cp4ba/deploy/base/cr.yaml) file located in the [base](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/cloudpak/cp4ba/deploy/base) sub-directory. This base file is quite minimal, and for good reason, as explained shortly. The yaml's describing the different components constituting the cloud pak are defined in the [overlays](https://github.com/oto-gitops-oneshot/otp-gitops-services/tree/master/instances/cloudpak/cp4ba/deploy/overlays/ibmcloud-roks) directory. For instance, the following components, amongst others, are defined as yaml's:
 
 1) GraphQL
 2) CPE
 3) CSS
 4) TM
 
-We provide a framework whereby the components an operator wishes to deploy can be easily "toggled" on and off simply by commenting and uncommenting the entries found in the **kustomization.yaml** file found in the aforementioned **overlays/ibmcloud-roks** sub-directory. For instance, if an operator wishes to deploy all components, the YAML would be as such:
+We provide a framework whereby the components an operator wishes to deploy can be easily "toggled" on and off simply by commenting and uncommenting the entries found in the [kustomization](https://github.com/oto-gitops-oneshot/otp-gitops-services/blob/master/instances/cloudpak/cp4ba/deploy/overlays/ibmcloud-roks/kustomization.yaml) file found in the aforementioned overlays sub-directory. For instance, if an operator wishes to deploy all components, the YAML would be as such:
 
 ![Parent - Services - Deploy - Kustomize - All](Images/Kustomize_Deploy_All.png)
 
-If BAN and CPE were not required, the corresponding entries are simply commented out:
+In the event BAN and CPE were not required, the corresponding entries are simply commented out:
 
 ![Parent - Services - Deploy - Kustomize - Some](Images/Kustomize_Deploy_Some.png)
 
