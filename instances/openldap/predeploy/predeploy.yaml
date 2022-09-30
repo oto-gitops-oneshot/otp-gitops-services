@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: openldap-configmap-configuration
+  namespace: openldap
+spec:
+  template:
+    spec:
+      serviceAccountName: db2-configure-sa
+      containers:
+      - name: openldap-predeploy
+        image:  quay.io/marwan_attar_ibm/cp4ba-db2-init
+        command: ["./configure_db2.sh"]
+        env:
+        - name: KUBECONFIG
+          value: "/tmp/config"   # Id running this process isn't root. The location of the KUBECONFIG file, unless otherwise specified, is in /root. We change it to /tmp to avoid permission issues
+        imagePullPolicy: Always
+      restartPolicy: OnFailure
+  backoffLimit: 2
