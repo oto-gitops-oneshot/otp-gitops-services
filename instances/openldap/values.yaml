@@ -436,6 +436,9 @@ phpldapadmin:
     hosts:
     - phpldapadmin.local
 
+# We pre-create a ConfigMap containing the correct passwords and inject it as oppposed to the one defined below. This is to avoid plain text secrets
+useExistingCM: true
+
 customLdifFiles:
   01-default-users.ldif: |-
     # Units
