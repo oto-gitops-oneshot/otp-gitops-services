@@ -27,9 +27,6 @@ spec:
     metadata:
       annotations:
         checksum/configmap-env: {{ include (print $.Template.BasePath "/configmap-env.yaml") . | sha256sum }}
-        {{- if .Values.customLdifFiles}}
-        checksum/configmap-customldif: {{ include (print $.Template.BasePath "/configmap-customldif.yaml") . | sha256sum }}
-        {{- end }}
       labels: {{- include "common.labels.standard" . | nindent 8 }}
         app.kubernetes.io/component: {{ template "openldap.fullname" . }}
         release: {{ .Release.Name }}
@@ -109,7 +106,7 @@ spec:
           args:
             - -l
             - {{ .Values.logLevel }}
-          {{- if or .Values.customLdifFiles .Values.customFileSets }}
+          {{- if or .Values.useExistingCM .Values.customFileSets }}
             - --copy-service
           {{- end }}
           {{- if .Values.containerSecurityContext.enabled }}
@@ -204,7 +201,7 @@ spec:
             - name: data
               mountPath: /container/service/slapd/assets/certs
 {{- end }}
-{{- if .Values.customLdifFiles }}
+{{- if .Values.useExistingCM }}
             - name: custom-ldif-files
               mountPath: /container/service/slapd/assets/config/bootstrap/ldif/custom
 {{- end }}
@@ -230,7 +227,7 @@ spec:
             claimName: {{ .Values.persistence.existingClaim }}
 {{- end }}
 {{- end }}
-{{- if .Values.customLdifFiles }}
+{{- if .Values.useExistingCM }}
         - name: custom-ldif-files
           configMap:
             name: {{ template "openldap.fullname" . }}-customldif
