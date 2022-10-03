@@ -28,7 +28,6 @@ spec:
     sc_deployment_profile_size: small
     sc_deployment_platform: "changeme" # Populated in overlays/.../platform.yaml 
     sc_ingress_enable: false
-    sc_deployment_hostname_suffix: "{{ cp4ba_project_name }}.{{ apps_endpoint_domain }}" # Populated in overlays/.../platform.yaml
     sc_image_repository: cp.icr.io
     trusted_certificate_list: []
     sc_install_automation_base: true # Originaly Based on https://www.ibm.com/docs/en/cloud-paks/cp-biz-automation/22.0.1?topic=insights-customizing-kafka-elasticsearch-server-configuration,
